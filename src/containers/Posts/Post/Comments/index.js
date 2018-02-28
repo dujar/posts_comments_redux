@@ -22,7 +22,7 @@ class Comments extends React.Component {
       let postComments = this.props.comments.filter(
         item => item.parentId === this.props.post.id && item.deleted === false && item.parentDeleted === false
       );
-      console.log('comments:', postComments);
+      // console.log('comments:', postComments);
       return postComments.map(comment => <Comment comment={comment} post={this.props.post} key={comment.id}/>)
     }
   }

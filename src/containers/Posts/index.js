@@ -10,7 +10,7 @@ class Posts extends React.Component {
   };
 
   componentDidMount() {
-    console.log('didmount:', this.props.posts);
+    // console.log('didmount:', this.props.posts);
     if (this.props.posts) {
       this.setState({ posts: this.props.posts });
     }

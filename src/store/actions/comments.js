@@ -20,7 +20,7 @@ export const voteComment = (id, vote) => {
 
 
 export function voteCommentAsync(id, vote,parentId) {
-  console.log("inside voteComment : parentId:",parentId)
+  // console.log("inside voteComment : parentId:",parentId)
   return dispatch => {
     axiosInstance
       .post('/comments/' + id, {
@@ -102,7 +102,7 @@ export const getComments = comments => {
 };
 
 export const getCommentsAsync = postId => {
-  console.log("inside comments async: postId:",postId)
+  // console.log("inside comments async: postId:",postId)
   return dispatch => {
     axiosInstance
       .get('/posts/' + postId + '/comments')
