@@ -7,7 +7,6 @@ import {
 import serialize from 'form-serialize';
 import { connect } from 'react-redux';
 
-import AddButton from 'react-icons/lib/md/add-circle';
 
 class EditComment extends React.Component {
   state = {

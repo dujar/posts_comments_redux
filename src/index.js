@@ -8,7 +8,6 @@ import thunk from 'redux-thunk';
 import rootReducer from './store/reducers/';
 import { BrowserRouter } from 'react-router-dom';
 import logger from 'redux-logger';
-import {Button} from 'reactbulma'
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 

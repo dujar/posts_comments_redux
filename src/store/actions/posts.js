@@ -1,6 +1,4 @@
 import axiosInstance from '../axiosRequests'
-import {isLoading, hasErrored} from './helper'
-
 import uuid from 'uuid/v4'
 export const GET_POSTS = 'GET_POSTS'
 export const UPDATE_POST = 'UPDATE_POSTS'
@@ -43,7 +41,7 @@ export function getPostsAsync(){
    axiosInstance.get("/posts")
    .then(({data}) => dispatch(getPosts(data)))
   //  .then(resp => dispatch(isLoading(false)))
-   .catch(err => dispatch(hasErrored(true)))
+  //  .catch(err => dispatch(hasErrored(true)))
   }
 }
 

@@ -1,20 +1,16 @@
 import React from 'react';
-import { Box } from 'reactbulma';
-import DeleteButton from 'react-icons/lib/ti/delete-outline';
 import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import {
   getCommentsAsync,
-  getComments,
   deleteCommentAsync
 } from '../../../../store/actions/comments';
-import EditButton from 'react-icons/lib/md/edit';
 import Comment from './Comment/'
 
 class Comments extends React.Component {
 
   componentDidMount() {
-    this.props.getComments(this.props.postId);
+    this.props.getComments(this.props.post.id);
   }
   render() {
     if (!this.props.comments) {
@@ -24,10 +20,10 @@ class Comments extends React.Component {
 
     if (this.props.comments && this.props.comments.length > 0) {
       let postComments = this.props.comments.filter(
-        item => item.parentId === this.props.postId && item.deleted === false && item.parentDeleted === false
+        item => item.parentId === this.props.post.id && item.deleted === false && item.parentDeleted === false
       );
       console.log('comments:', postComments);
-      return postComments.map(comment => <Comment comment={comment} postId={this.props.postId} key={comment.id}/>)
+      return postComments.map(comment => <Comment comment={comment} post={this.props.post} key={comment.id}/>)
     }
   }
 }

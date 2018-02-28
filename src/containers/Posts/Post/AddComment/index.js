@@ -8,7 +8,6 @@ import {
 import serialize from 'form-serialize';
 import { connect } from 'react-redux';
 
-import AddButton from 'react-icons/lib/md/add-circle';
 
 class AddComment extends React.Component {
   state = {
@@ -31,7 +30,7 @@ class AddComment extends React.Component {
     this.setState({ fieldmissing: false });
     console.log(comment.target);
     comment = serialize(comment.target, { hash: true });
-    comment.parentId = this.props.id;
+    comment.parentId = this.props.post.id;
     if(this.props.comment){
     comment.id = this.props.comment.id
     }
@@ -44,9 +43,9 @@ class AddComment extends React.Component {
       return this.setState({ fieldmissing: true });
     }
     console.log("pass validation")
-    this.props.addComment(comment);
+    this.props.addComment(comment,this.props.post);
     this.props.commentToAdd()
-    this.props.history.push("/posts/"+this.props.id)
+    this.props.history.push("/posts/"+this.props.post.id)
   };
 
   handleComment = comment => {
@@ -104,7 +103,7 @@ class AddComment extends React.Component {
 
 const mapDispatchToProps = dispatch => {
   return {
-    addComment: comment => dispatch(addCommentAsync(comment)),
+    addComment: (comment,post) => dispatch(addCommentAsync(comment,post)),
     updateComment: comment => dispatch(updateCommentAsync(comment))
   };
 };

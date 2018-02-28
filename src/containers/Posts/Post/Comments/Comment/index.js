@@ -4,12 +4,9 @@ import DeleteButton from 'react-icons/lib/ti/delete-outline';
 import { withRouter } from 'react-router-dom';
 import EditComment from '../../EditComment'
 import {
-  getCommentsAsync,
-  getComments,
   deleteCommentAsync
 } from '../../../../../store/actions/comments';
 import EditButton from 'react-icons/lib/md/edit';
-import AddComment from '../../AddComment';
 import {connect} from 'react-redux'
 import Thumbs from '../../../../../components/Thumbs'
 
@@ -32,11 +29,11 @@ class Comment extends React.Component {
         <strong>Delete me:</strong>
         <DeleteButton
           onClick={() => {
-            this.props.deleteComment(comment);
+            this.props.deleteComment(comment, this.props.post);
           }}
         />
         <strong>Vote!</strong>
-        <Thumbs comment={comment} postId={this.props.postId}/>
+        <Thumbs comment={comment} postId={this.props.post.id}/>
         {this.state.edit && (
           <div>
             <EditComment id={comment.parentId} comment={comment} edit={()=> this.setState((state) => {
@@ -66,7 +63,7 @@ class Comment extends React.Component {
 }
 const mapDispatchToProps = dispatch => {
   return {
-    deleteComment: comment => dispatch(deleteCommentAsync(comment))
+    deleteComment: (comment,post) => dispatch(deleteCommentAsync(comment,post))
   };
 }
 export default withRouter(connect(null,mapDispatchToProps)(Comment));

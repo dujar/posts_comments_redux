@@ -1,5 +1,4 @@
 import * as actionType from '../actions/';
-import {Map} from 'immutable'
 
 const categories = (state = {}, action) => {
       console.log("ACTION:",action)

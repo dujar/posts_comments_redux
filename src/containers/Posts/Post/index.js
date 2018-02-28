@@ -8,6 +8,7 @@ import AddComment from './AddComment/';
 import ClickPostCrud from '../../../components/ClickPostCrud';
 import { Box } from 'reactbulma';
 import Thumbs from '../../../components/Thumbs'
+import ErrorComponent from '../../../components/ErrorComponent'
 
 class Post extends React.Component {
   state = {
@@ -18,26 +19,36 @@ class Post extends React.Component {
     const { post, location, posts } = this.props;
 
     let postItem = post;
+
+    if(!postItem){
+      return(
+        <ErrorComponent message={"You are trying to access a post that has to my guess been deleted"}/>
+      )
+    }
     let comments = null;
     if (
       postItem &&
       postItem.commentCount > 0 &&
-      this.props.location.pathname !== '/'
+      this.props.location.pathname !== '/' &&
+      this.props.location.pathname !== '/posts'
+
     ) {
-      comments = <Comments postId={postItem.id} />;
+      comments = <Comments post={postItem} />;
     }
 
     let commentToAdd = null;
     if (this.state.commentToAdd) {
       commentToAdd = (
         <AddComment
-          id={postItem.id}
+          post={postItem}
           commentToAdd={() => this.setState({ commentToAdd: false })}
         />
       );
     }
     let addButtonComment = null;
-    if (this.props.location.pathname !== '/') {
+    if (this.props.location.pathname !== '/' &&
+        this.props.location.pathname !== '/posts'
+        ) {
       addButtonComment = (
         <div>
           <strong>add comment:</strong>

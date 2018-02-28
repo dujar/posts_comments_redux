@@ -1,6 +1,5 @@
 import axiosInstance from '../axiosRequests'
 import {isLoading, hasErrored} from './helper'
-import React from 'react'
 export const GET_CATEGORIES = 'GET_CATEGORIES'
 
 

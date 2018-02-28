@@ -1,5 +1,4 @@
 import { DELETE_POST } from './posts';
-import { isLoading, hasErrored } from './helper';
 import axiosInstance from '../axiosRequests';
 import { getPostsAsync } from '../actions/posts';
 import uuid from 'uuid/v4';
@@ -13,7 +12,10 @@ export const VOTE_COMMENT = 'VOTE_COMMENT';
 // SYNCHRONOUS ACTIONS
 
 export const voteComment = (id, vote) => {
-  type: VOTE_COMMENT, id, vote;
+  return{
+  type: VOTE_COMMENT, id, vote
+
+  }
 };
 
 
@@ -56,7 +58,7 @@ export const addComment = comment => {
   };
 };
 
-export function addCommentAsync(comment) {
+export function addCommentAsync(comment,post) {
   return dispatch => {
     axiosInstance
       .post('/comments', {
@@ -66,7 +68,9 @@ export function addCommentAsync(comment) {
         author: comment.author,
         parentId: comment.parentId
       })
-      .then(resp => dispatch(getCommentsAsync(comment.parentId)));
+      .then(resp => dispatch(getPostsAsync()))
+      .then(resp => dispatch(getCommentsAsync(comment.parentId)))
+
   };
 }
 // id: Any unique ID. As with posts, UUID is probably the best here.
@@ -81,11 +85,13 @@ export const deleteComment = id => {
     id
   };
 };
-export const deleteCommentAsync = comment => {
+export const deleteCommentAsync = (comment,post) => {
+
   return dispatch => {
     axiosInstance
       .delete('/comments/' + comment.id)
-      .then(resp => dispatch(getCommentsAsync(comment.parentId)));
+      .then(resp => dispatch(getPostsAsync()))
+      .then(resp => dispatch(getCommentsAsync(comment.parentId)))
   };
 };
 export const getComments = comments => {
